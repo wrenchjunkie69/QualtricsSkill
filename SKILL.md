@@ -11,13 +11,15 @@ Complete the user's Qualtrics task through the official Public API and their exi
 
 This skill offers capabilities on demand. Loading it does not authorize a full research pipeline or additional account actions.
 
-| Student request | Do now | Stop/next step |
+| Request intent | Do now | Stop/next step |
 |---|---|---|
-| "Pull the results" | Select the intended survey, export requested responses and verify the saved file | Provide its actual location, format, filters and count/completeness; ask briefly if they want help going further. Do not run models or change the survey. |
-| "Pull results and consider linear regression" | Retrieve results, inspect relevant variables/types and assess suitability | Explain possible outcomes/predictors and assumptions; help choose missing essentials. Do not interpret "consider" as a request to automatically fit every candidate model. |
-| "Run logistic regression of purchase on these predictors" | Prepare and fit that requested model, checking coding/design and diagnostics | Explain findings and limitations; no repeated permission request for steps already covered by the task. |
-| "Develop a survey" | Draft/implement the requested instrument and verify it | Publishing, invitations and unrelated analysis are separate scopes. |
-| "Help me plan a study" | Develop the requested plan with the student | Do not access an account or create a survey unless needed/requested. |
+| Clarify a business problem or research question | Distinguish the decision, symptoms, possible explanations and information needed | Deliver focused research questions/design options; no account access merely to plan. |
+| Draft an instrument for a stated goal | Connect objectives to constructs, items, response formats and analysis | Deliver the requested questionnaire/specification; API creation only when requested or clearly part of the task. |
+| Improve an existing questionnaire | Review coverage, wording, burden, coding and logic against its purpose | Revise within scope, preserving IDs/data compatibility where relevant; do not redesign unrelated sections. |
+| Retrieve/archive survey data | Select the intended survey, export requested responses and verify saved files | Report actual location, format, filters and count/completeness; offer a next step without running analyses. |
+| Assess whether a method suits the data | Inspect relevant variables, measurement and study design | Explain suitability and missing essentials; assessment does not request every candidate fit. |
+| Summarize or compare responses | Produce the requested descriptives, comparison or qualitative synthesis | Report denominators, uncertainty and limits; regression is not a mandatory next step. |
+| Fit a specified model or test an experimental contrast | Execute the justified analysis with coding/design checks and diagnostics | Explain findings and limitations; no repeated permission request for steps already covered. |
 
 Make useful progress with available information and ask only for meaningful missing choices. Offer one sensible next step after a completed narrow request; wait for the student before starting optional work. Executable templates are tools to select, not startup hooks or an automatic checklist of analyses.
 
@@ -34,12 +36,15 @@ Use this skill for a whole student research project or just the requested step. 
 | Requested work | Reference to read | Concrete deliverable |
 |---|---|---|
 | Choose a study/survey type, hypotheses, sample or variables | [Research planning](references/research-planning.md) | Study plan, operational definitions, sampling/power assumptions and analysis plan |
-| Develop questionnaire, experiments, scales or branching | [Research planning](references/research-planning.md), then API workflows when implementing | Questionnaire, codebook, logic/randomization specification and pilot checklist |
+| Develop or critique questionnaire wording, scales, order or branching | [Questionnaire design](references/questionnaire-design.md), plus planning when the goal is unclear | Goal-linked questionnaire, codebook, logic specification and proportionate pilot plan |
+| Plan experiments, sampling or repeated measurement | [Research planning](references/research-planning.md), then questionnaire/API references as needed | Design, assignment/recruitment plan, measures and analysis assumptions |
 | Clean, describe, compare, model, segment or analyze text | [Analysis methods](references/analysis-methods.md) | Audited analysis dataset, justified method, diagnostics and interpretable results |
 | Rating, rank, choice conjoint or MaxDiff | [Conjoint](references/conjoint.md) | Attribute/level design, task/data structure, appropriate estimation and limitations |
 | Run supported models or create reproducible class deliverables | [Analytics runner](references/analytics-runner.md) | Executed code, model tables/diagnostics, audit trail and student-facing explanation |
 
 **Analysis execution:** export from Qualtrics when needed, then run local Python/R analysis. The Public API catalog is not a statistical-computation service. Qualtrics Stats iQ/conjoint product features and licenses are distinct from locally fitting models. Do not invent regression/conjoint-estimation API endpoints or claim local calculations were performed inside Qualtrics.
+
+For survey development, first connect the intended decision to research questions and measurable information. A manager's action question, a research question and a respondent-facing item serve different purposes. Choose exploratory, descriptive, experimental or mixed methods to suit the information gap; an interview guide, existing data or observation may be more useful than a new survey. Do not force hypotheses, demographic batteries or regression into every project. Use the optional [research templates](assets/research/README.md) when a planning artifact would help, without making the student fill an entire intake form for a narrow task.
 
 Plan the outcome scale, predictors, unit of analysis, repeated observations, exclusions, missing values, contrasts and validation before fitting. The numeric appearance of a category code does not make it continuous. Distinguish explanation, prediction and causal estimation; observational associations do not establish an intervention effect. Do not use outcome leakage or repeated rows from the same person as independent validation samples.
 

@@ -15,18 +15,23 @@ This requires an agent with a local terminal/filesystem and the user's authority
 
 ## What the skill does when asked
 
-| Request | Behavior |
+| Example task | Behavior |
 |---|---|
-| “Pull my survey results” | Export the selected results, verify the saved files, provide their location/options/count, then ask whether the student wants a next step. No automatic modeling. |
-| “Pull results and consider linear regression” | Retrieve and inspect variables, explain suitability/assumptions, and help choose outcome/predictors before a model is requested. |
-| “Run this regression/conjoint model” | Run that justified model with explicit coding and diagnostics; report actual results and limits. |
-| “Help develop a survey or plan research” | Work through measurement, question types, sampling, design and the requested draft. Publication/distribution are separate actions. |
+| A repair service wants to understand abandoned bookings | Separate possible explanations from evidence, form research questions and choose useful records, interviews or survey measures. |
+| A student organization needs an event feedback form | Draft relevant behavior/experience items, suitable answer formats and short branching; avoid an unrelated demographic or regression battery. |
+| A retailer wants to measure brand awareness | Distinguish unaided recall from aided recognition, choose an eligible sample and preserve question order to avoid prompting the answer. |
+| A team wants to compare two onboarding messages | Plan assignment, comparable exposure, primary outcome and the requested contrast; distinguish an experiment from an observational comparison. |
+| A researcher needs last month's responses archived | Export the selected records, verify files and report location/options/count. Offer further help without automatically analyzing. |
+| A student asks whether renewal intention can be modeled | Inspect measurement, predictors, sample and dependence; discuss an appropriate model before fitting one. |
+| A product team requests trade-off analysis | Match rating, ranking or choice tasks to their actual design and run the requested justified analysis. |
 
 **Programmatic execution:** Qualtrics operations use documented HTTP endpoints or API connectors/MCP. Statistics run in Python/R; transfers use documented files. No automatic browser/editor/screen takeover when an API route exists. For an unsupported feature, inspect the contract/existing definitions, use a supplied template, or explain the gap. Screen control requires an explicit user request.
 
 ## Install
 
 Prerequisites: Node.js 20+ and either Python 3.10+ to launch setup or [uv](https://docs.astral.sh/uv/getting-started/installation/). Git is optional if downloading a ZIP. Use official runtime installers or an appropriate package manager; if a tool cannot be installed under the current permissions, report it clearly.
+
+**Why Node.js?** The bundled API client and contract-search tools are JavaScript command-line programs. Node runs their HTTP requests, uploads, exports, pagination and job polling; they use built-in libraries and require no npm packages. Python handles setup helpers and local statistics. This is the package's implementation choice, not a requirement imposed by the Qualtrics API. Planning alone needs neither runtime; executing the bundled helpers needs their respective runtime.
 
 For the upstream repository (use the user's supplied URL instead for a fork):
 
@@ -91,10 +96,12 @@ An account key/permission or licensed-feature failure is distinct from a missing
 ## Templates and results
 
 - [Question templates](assets/questions/README.md): editable JSON for API creation, without live survey IDs or respondent data.
+- [Research templates](assets/research/README.md): a decision/research brief, question-to-objective blueprint and pilot plan, selected only when useful for the task.
 - [Python analysis starters](assets/analysis/README.md): scripts/configurations to select when analysis is requested, not an automatic battery of tests.
 - `scripts/results.py fetch`: retrieve requested survey data, question metadata and a codebook into the user's chosen new output directory; no modeling.
 - [Analytics runner](references/analytics-runner.md): CSV auditing, linear regression, binary logistic, rating conjoint, explicitly labeled full-ranking OLS approximation, and conditional-logit choice conjoint. It creates coefficients, intervals, diagnostics, reproducibility records and starter reports.
-- [Planning](references/research-planning.md), [method selection](references/analysis-methods.md), [conjoint](references/conjoint.md): broader agent workflows, including ordinal/count/repeated models, tests, reliability, segmentation and text analysis. These are not all implemented core commands.
+- [Planning](references/research-planning.md) and [questionnaire design](references/questionnaire-design.md): problem definition, research questions, study design, measurement, neutral wording, question flow, sampling and pilot decisions.
+- [Method selection](references/analysis-methods.md) and [conjoint](references/conjoint.md): broader agent workflows, including ordinal/count/repeated models, tests, reliability, segmentation and text analysis. These are not all implemented core commands.
 
 Use real IDs from `node scripts/qualtrics.mjs paginate --path /surveys`; resolve ambiguity rather than guessing. Then, when retrieval is requested:
 
@@ -133,4 +140,4 @@ Original tooling is MIT licensed; see [LICENSE](LICENSE) and [NOTICE](NOTICE.md)
 
 A useful installation request is: “Read the README at https://github.com/wrenchjunkie69/QualtricsSkill, inspect and install the skill for my AI app, create/check the isolated analytics environment, and guide me through private API-key setup if I need account access. Verify the installation, then wait for my research task.”
 
-After installation, narrow requests stay narrow. For example: “Pull results from this survey” retrieves files and offers a next step; “Help me assess whether these variables suit linear regression” starts a suitability discussion; “Fit this specified model” requests that analysis. No screen-control or automatic full-study pipeline is implied.
+After installation, give the agent the actual goal and requested deliverable: a research question, a questionnaire critique, an inactive survey draft, an export, a subgroup comparison or a specified model. It should infer the useful method and ask for missing essentials without treating every task as a full research project. No screen-control or automatic full-study pipeline is implied.
