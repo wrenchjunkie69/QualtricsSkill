@@ -1,151 +1,253 @@
 # Qualtrics Agent Skill
 
-An API-first research toolbox for Codex, Claude Code and other terminal-enabled AI agents. It helps students develop surveys, retrieve results, select analysis methods, and run reproducible local Python analyses—**one requested step at a time**.
+**Build a survey with a purpose. Make sense of the answers.**
 
-## If an AI agent was given this GitHub link
+Your project starts with something you want to understand: why people leave, what customers value, which concept works better, or what a business should investigate next. The choices you make about questions, measurement and sampling shape what you can learn from the results.
 
-1. Read this README and [SKILL.md](SKILL.md), then inspect the setup scripts. Clone the repository URL the user actually supplied into a new directory, or download/extract its source ZIP. Do not invent an owner/repository URL.
-2. Check local tools. Use an existing Node.js 20+ installation and Python/uv where suitable. Default setup provisions an isolated **Python 3.12** analytics environment with pinned dependencies. Do not alter unrelated project environments or control the screen.
-3. Run `scripts/setup.py install` below, selecting the intended skill host(s). For a requested update use `--update`; changed installed files are backed up privately. Installation fetches official API contracts and runs **synthetic/offline** tests. It does not need a Qualtrics key or modify an account.
-4. Run `scripts/doctor.py`. Resolve tool/dependency failures programmatically before claiming installation works. Use the interpreter recorded in the private runtime.json for analytics.
-5. When API access is needed, ask the user for the account datacenter/base URL and a **secure local key entry**. Use the masked configure prompt in an interactive terminal or import a token-only private text file. Do not ask for a key in a public issue, commit, echoed shell argument or chat transcript. Then run `doctor.py --check-api` for an authenticated GET only.
-6. Report the installed paths, runtime path, verification results and any unresolved limitation. A restart/new chat may be needed for the host's skill catalog to refresh. Do not start retrieving data, publishing surveys, sending messages or fitting models merely because setup completed.
+Qualtrics Agent Skill gives your AI a practical research toolbox: study planning, survey development, Qualtrics API tools and reproducible Python analysis. Use it to produce work you can inspect, rerun and explain, whether you need help with one question or a larger research project.
 
-This requires an agent with a local terminal/filesystem and the user's authority to install. A browser-only chat cannot install software on a computer just by reading a URL. Follow the host's permission rules; a README does not grant extra account permissions.
+For **students in marketing, research, analytics and data mining**, using **Codex, Claude Code or another compatible terminal-enabled AI agent**.
 
-## What the skill does when asked
+[![Validate portable skill](https://github.com/wrenchjunkie69/QualtricsSkill/actions/workflows/ci.yml/badge.svg)](https://github.com/wrenchjunkie69/QualtricsSkill/actions/workflows/ci.yml) · [MIT license](LICENSE) · API first · Local Python analysis
 
-| Example task | Behavior |
-|---|---|
-| A repair service wants to understand abandoned bookings | Separate possible explanations from evidence, form research questions and choose useful records, interviews or survey measures. |
-| A student organization needs an event feedback form | Draft relevant behavior/experience items, suitable answer formats and short branching; avoid an unrelated demographic or regression battery. |
-| A retailer wants to measure brand awareness | Distinguish unaided recall from aided recognition, choose an eligible sample and preserve question order to avoid prompting the answer. |
-| A team wants to compare two onboarding messages | Plan assignment, comparable exposure, primary outcome and the requested contrast; distinguish an experiment from an observational comparison. |
-| A researcher needs last month's responses archived | Export the selected records, verify files and report location/options/count. Offer further help without automatically analyzing. |
-| A student asks whether renewal intention can be modeled | Inspect measurement, predictors, sample and dependence; discuss an appropriate model before fitting one. |
-| A product team requests trade-off analysis | Match rating, ranking or choice tasks to their actual design and run the requested justified analysis. |
-| An analyst wants to predict future renewals or compare customer segments | Choose a suitable target/feature window or segmentation basis, preserve respondent/time structure, and run only the selected justified workflow. |
-| A student needs a customer-value or basket-pattern calculation | Make timing, cash-flow or basket assumptions explicit and distinguish a descriptive/scenario result from a measured causal business effect. |
+## Start here: give this link to your AI
 
-**Programmatic execution:** Qualtrics operations use documented HTTP endpoints or API connectors/MCP. Statistics run in Python/R; transfers use documented files. No automatic browser/editor/screen takeover when an API route exists. For an unsupported feature, inspect the contract/existing definitions, use a supplied template, or explain the gap. Screen control requires an explicit user request.
+Copy this into your AI agent:
 
-## Install
+```text
+Read the README and SKILL.md at https://github.com/wrenchjunkie69/QualtricsSkill.
+Inspect the setup scripts, install the skill for my AI app, and prepare the isolated
+Python analytics environment. Run the installation checks and dependency doctor.
+If I need Qualtrics account access, guide me through private local API-key setup
+and verify connectivity. Report the installed paths and verification results,
+then wait for my research task.
+```
 
-Prerequisites: Node.js 20+ and either Python 3.10+ to launch setup or [uv](https://docs.astral.sh/uv/getting-started/installation/). Git is optional if downloading a ZIP. Use official runtime installers or an appropriate package manager; if a tool cannot be installed under the current permissions, report it clearly.
+Your agent checks the tools, installs the skill and verifies the environment. You can then describe the research task in ordinary language. A local terminal/filesystem is required for installation; a browser-only conversation cannot install software on your computer just by reading the link.
 
-**Why Node.js?** The bundled API client and contract-search tools are JavaScript command-line programs. Node runs their HTTP requests, uploads, exports, pagination and job polling; they use built-in libraries and require no npm packages. Python handles setup helpers and local statistics. This is the package's implementation choice, not a requirement imposed by the Qualtrics API. Planning alone needs neither runtime; executing the bundled helpers needs their respective runtime.
+**Already installed?** Start with [a student task](#what-you-can-do-with-it). **Installing or maintaining it?** Go to [AI installation instructions](#for-ai-agents-installation-and-first-use), [private key setup](#connect-your-qualtrics-account) or [verification](#verification-and-updates).
 
-For the upstream repository (use the user's supplied URL instead for a fork):
+## What you can do with it
+
+Start at the point that matches your project. Each request can stand on its own.
+
+| Where you are | How the skill helps | What you can leave with |
+|---|---|---|
+| **You have a topic, but the research question is vague** | Clarify the decision, competing explanations, target population and information needed. Choose exploratory, descriptive, experimental or mixed methods. | Focused research questions and a study plan you can justify. |
+| **You need a questionnaire people can answer** | Connect objectives to measures; choose formats/scales, improve wording, plan screening, branching, order and a pilot. | A questionnaire, question blueprint, codebook and logic specification. |
+| **You want the survey built in Qualtrics** | Create or revise the requested draft through documented APIs, preserve relevant IDs/codes and verify the definition. | A reviewable survey draft with a record of verified changes. |
+| **You need your results out of Qualtrics** | Retrieve the requested export, question metadata and codebook; check scope, files and counts. | Saved responses, original download, metadata and a retrieval manifest. |
+| **You have data but are unsure which analysis fits** | Examine measurement, outcome type, missingness, independent units and the question the analysis should answer. | A reasoned method choice and preparation/validation plan. |
+| **You need to explain differences or relationships** | Run the requested supported regression or comparison, or develop an appropriate custom workflow. Interpret coding, uncertainty, diagnostics and substantive size. | Executed Python, result tables and an explanation grounded in your study. |
+| **You are studying product trade-offs** | Plan attribute levels and rating, ranking or choice tasks; map profiles to responses and use the appropriate supported estimator. | Part-worth estimates, applicable importance summaries and clear design/estimation limits. |
+| **You want to predict outcomes or explore customer segments** | Use a selected predictive pipeline or numeric clustering/PCA workflow, with attention to leakage, respondent/time structure and validation. | Holdout predictions and baseline metrics, or exploratory assignments and segment profiles. |
+| **You are connecting analytics to a marketing decision** | Work through co-selections, customer-value assumptions, cohorts/RFM, experiments, response models or elasticity as appropriate. | A transparent calculation or analysis plan with units, assumptions and decision implications. |
+
+The skill follows the **step you request**. An export request ends with the saved location, scope/counts and an optional next step. A request to assess a method leads to a suitability discussion. A request to fit a specified model authorizes that analysis. Installing the skill or retrieving a file does not start a whole research pipeline.
+
+## Ask for an outcome, not just a software command
+
+These are starting points you can adapt to your own project:
+
+- **Research design:** “Our campus shuttle has low usage. Help us distinguish awareness, access and service issues before we write survey questions.”
+- **Questionnaire review:** “Review this feedback form for leading wording and questions that nonusers cannot answer. Give me a revised draft and explain the changes.”
+- **Survey building:** “Build an inactive draft for this concept test, with eligibility screening and the branching in my brief. Verify the questions and flow.”
+- **Results retrieval:** “Archive the completed responses for my selected survey and reporting period. Confirm the date/completion definitions and show me where the files were saved.”
+- **Statistical reasoning:** “The same respondents rated both package designs. Help me choose and explain a suitable comparison.”
+- **Regression:** “Fit the specified renewal model using these predictors. Explain the event coding, estimates, uncertainty and diagnostics.”
+- **Prediction:** “Evaluate this fixed classifier on my declared holdout. Check for respondent overlap and future information, and compare it with a simple baseline.”
+- **Segmentation:** “Explore groups based on these needs measures. Show their observed profiles and what further evidence would make the segments useful.”
+- **Conjoint:** “Help design a trade-off study for a delivery service. Work through attributes, levels, task format and analysis before creating the draft.”
+- **Customer value:** “Show how these explicit retention and margin assumptions affect an 18-month customer-value scenario. Include cash-flow timing and sensitivity.”
+
+You can ask the agent to explain why a method fits, how one coefficient should be read, or what a result cannot establish. The aim is a defensible finding and an understandable process.
+
+## Included Python analyses
+
+These are runnable tools and editable starters supplied with the skill. Select the method that fits the task and prepare its inputs from the actual codebook.
+
+| Your analytical goal | Included implementation | Useful outputs |
+|---|---|---|
+| **Explain a numeric or binary outcome** | Linear regression with robust/declared cluster inference; binary logistic regression with explicit event/reference coding. | Coefficients, intervals, odds ratios where relevant, audit records, fitted values, diagnostics and a starter report. |
+| **Compare two independent groups** | A selectable Welch comparison script. | Mean difference, interval and test results, with checks for repeated-person misuse. |
+| **Estimate product trade-offs** | Rating conjoint, an explicitly labeled complete-ranking OLS approximation, and conditional-logit choice conjoint. | Pooled part-worth estimates, applicable attribute-importance summaries and method-specific inference/diagnostics. |
+| **Evaluate a fixed prediction model** | Binary classification or numeric prediction using regularized linear/logistic, tree, random forest, kNN or a small MLP. | Declared-holdout predictions, model/baseline metrics, missingness and unknown-category audit, and provenance. |
+| **Explore numeric segments** | K-means with optional PCA, a selected cluster count and multiple initializations. | Assignments, profiles in original units, component weights/variance, silhouette and initialization agreement. |
+| **Describe pairwise co-selections** | Two-item support, directional confidence, lift and leverage from observed 0/1 indicators. | Rule counts and a pair-rule table using the stated basket denominator. |
+| **Calculate an explicit value scenario** | Finite discounted margins with conditional retention, initial margin and acquisition cost. | A cash-flow ledger and net value under the supplied assumptions. |
+
+[Python starters and configurations](assets/analysis/README.md) explain how to select each tool. [Inference/conjoint details](references/analytics-runner.md) and [prediction requirements](references/data-science.md) explain inputs and limits.
+
+The ranking model is an equal-spacing approximation; conjoint estimates are pooled, not individual utilities. The prediction starter evaluates a fixed model on prepared train/test rows; tuning, calibration and nested validation need a suitable additional workflow. Clustering is exploratory, pair rules describe association, and the value calculator evaluates assumptions rather than estimating actual lifetime behavior.
+
+### Guidance beyond the starter commands
+
+The agent can use the focused references to plan and develop an appropriate custom Python analysis for:
+
+- **Statistical questions:** descriptive summaries, cross-tabs, categorical tests, paired/repeated comparisons, ANOVA, correlation, ordinal/multinomial/count or mixed models, reliability/factor analysis, and open-text coding.
+- **Data-mining questions:** feature timing/selection, cross-validation, probability calibration, alternative clustering, dimensionality reduction, larger association-rule searches, recommenders, forecasting and anomaly detection.
+- **Marketing questions:** RFM/cohorts, retention, campaign and factorial experiments, demand/response models, interactions, elasticity, customer value and the difference between predictive scores and incremental business effects.
+
+These are **guided custom workflows**, not a claim that every method is a built-in command. The agent must choose suitable libraries, verify dependencies and validate the actual analysis.
+
+## What you get to keep
+
+Your work can include artifacts you can open and review:
+
+- **Before collection:** an optional [research brief, question blueprint, pilot plan or analysis plan](assets/research/README.md), plus editable [API question templates](assets/questions/README.md).
+- **After retrieval:** `responses.csv`, the original download, `definition.json`, `codebook.csv` and `manifest.json`. The export-job locator is saved while polling for recovery.
+- **After a supported regression/conjoint run:** `analysis.json`, `coefficients.csv`, `fitted-values.csv`, `diagnostics.png` and `report.md`; applicable conjoint runs also produce part-worth/importance tables.
+- **After a mining task:** `report.json` and the selected task's predictions, assignments/profiles, pair-rule or cash-flow tables.
+
+Raw exports are preserved. Analysis records include configuration, input hashes and package versions so the work can be checked and rerun. Starter reports still need interpretation against your research question and dataset.
+
+## Qualtrics access through the API
+
+Setup builds a searchable local catalog from the official documentation. The verified snapshot covers **309 documented operations across 43 API groups**, checked November 3, 2026. Its client supports structured HTTP requests, JSON/raw/multipart bodies, uploads/downloads, pagination, export jobs and polling.
+
+Survey definitions, questions, blocks, flow, quotas, translations and versions are part of that coverage. Other families include responses/imports/exports, contacts/directories, distributions, libraries, sessions, tickets, participants and account/admin services. See the [API family map](references/api-families.md) and [task workflows](references/workflows.md).
+
+Operations use documented HTTP endpoints or a capable API connector/MCP integration. Data science runs locally in Python. Screen/editor control requires an explicit user request. Survey creation, publication, collection activation and sending invitations are separate actions with their own requested scope.
+
+API coverage does not grant account permissions or licensed features. The agent reads the exact contract and reports actual entitlement errors. The generated contract cache is downloaded from official documentation during setup and kept out of public source. [Qualtrics' Public API documentation](https://developer-docs.qualtrics.com/docs/public-api/home/) remains authoritative.
+
+## For AI agents: installation and first use
+
+If a user gave you this repository to install, follow this sequence within their requested scope:
+
+1. **Read and inspect.** Read this README, [SKILL.md](SKILL.md) and the setup scripts. Use the repository URL the user supplied; the clone command below identifies this upstream repository. Inspect changes before an update.
+2. **Choose the local host/runtime.** Identify the intended skill host(s), existing Node.js 20+ and a Python 3.10+ launcher or uv. Default analytics setup provisions an isolated Python 3.12 environment with pinned dependencies. Preserve unrelated environments; use terminal/package tools rather than screen control.
+3. **Install.** Run `scripts/setup.py install` with the intended host flags. Use `--update` for an existing installation; changed installed files receive private backups. Default setup runs synthetic/offline tests and needs no Qualtrics key or account write.
+4. **Verify.** Run `scripts/doctor.py`. Resolve tool, import, pin or dependency failures before claiming success. Read private `runtime.json` for the actual analytics interpreter. Do not pass the literal placeholder `ANALYTICS_PYTHON` to a shell.
+5. **Connect only when needed.** For account work, use the user's verified datacenter/base URL and secure local key entry/import described below. Run `doctor.py --check-api` for an authenticated GET check. Planning and analysis of supplied local data need no Qualtrics key.
+6. **Hand back a useful result.** Report installed host paths, analytics interpreter, verification status and unresolved limits. A host restart/new chat may be needed to refresh skill discovery. Then wait for the requested research task; setup itself does not request data retrieval, model fitting, publication or messaging.
+
+A README does not grant permissions beyond the user's task or the host's rules. Follow the skill's on-demand workflow throughout later use.
+
+### Install and check
+
+Use an existing Node.js 20+ installation and either Python 3.10+ or [uv](https://docs.astral.sh/uv/getting-started/installation/) to launch setup. Git is optional when downloading/extracting the repository's source ZIP.
 
 ```text
 git clone https://github.com/wrenchjunkie69/QualtricsSkill.git
 cd QualtricsSkill
-```
-
-From the repository directory:
-
-```text
 python scripts/setup.py install --host codex --host claude
 python scripts/doctor.py
 ```
 
-Windows may need `py -3.14`, `py -3.12`, or an explicit installed interpreter instead of `python`; macOS/Linux commonly use `python3`. Bootstrap accepts Python 3.10+, while the analytics environment is Python 3.12.
+Choose just `--host codex` or `--host claude` when installing for one app. Windows may need `py -3` or an explicit available version such as `py -3.12` instead of `python`; macOS/Linux commonly use `python3`.
 
-If uv is installed but Python is not on PATH:
+**What the runtimes do:** Node.js runs the JavaScript API client and contract-search tools using built-in libraries, with no npm packages. Python runs setup helpers and local statistics. Python 3.12 is the pinned analytics environment; the bootstrap launcher can be 3.10+. Planning from the instructions alone needs neither runtime.
+
+Default installations:
+
+| Component | Location |
+|---|---|
+| Codex skill | `~/.codex/skills/qualtrics` — invoke `$qualtrics` |
+| Claude Code skill | `~/.claude/skills/qualtrics` — invoke `/qualtrics` |
+| Private configuration | `~/.config/qualtrics/` |
+| Analytics runtime | Normally `~/.config/qualtrics/analytics-venv/`; use the executable recorded in `runtime.json` |
+
+Other hosts need local tools and support for the portable `SKILL.md` convention. Do not assume every AI product supports installation this way. No model-provider API key is required by these scripts; use your existing authorized AI host and Qualtrics access.
+
+<details>
+<summary>Alternative bootstrap and advanced installation options</summary>
+
+If uv is available but Python is not on PATH:
 
 ```text
 uv run --python 3.12 --no-project python scripts/setup.py install --host codex --host claude
 uv run --python 3.12 --no-project python scripts/doctor.py
 ```
 
-Setup uses uv to provision Python 3.12 if available; otherwise it uses an installed Python 3.12 (or `--python /path/to/python3.12`) with standard venv/pip. It checks dependency consistency and preserves existing unrelated environments. uv installs package files in copy mode to avoid hardlink problems on cloud-backed or restricted filesystems. `--api-only` skips analytics when that is deliberately wanted. `--analytics-env PATH` selects a dedicated existing/new analytics venv outside the repository. `--skip-tests` is for a deliberate maintenance exception; never describe skipped tests as passing.
+Setup uses uv to provision Python 3.12 when available; otherwise it uses installed Python 3.12 or `--python /path/to/python3.12` with venv/pip. uv uses copy mode to avoid cloud-filesystem hardlink problems. Recreate the environment on each computer rather than copying a venv.
 
-Default skill locations:
+- `--api-only` deliberately skips analytics.
+- `--analytics-env PATH` selects a dedicated existing/new analytics venv outside the repository.
+- `--skip-tests` is a deliberate maintenance exception; skipped checks must not be reported as passing.
 
-- Codex: `~/.codex/skills/qualtrics` (`$qualtrics`)
-- Claude Code: `~/.claude/skills/qualtrics` (`/qualtrics`)
-- Other compatible hosts: install/copy the portable skill files into that host's documented skill folder. Do not assume every product supports this convention.
+Use official runtime installers or an appropriate package manager when prerequisites are missing. Report a permission/dependency limitation clearly rather than claiming installation succeeded.
 
-Default private configuration on all platforms: `~/.config/qualtrics/`. Setup records installed locations and the **actual analytics Python executable** in `runtime.json`. Its analytics environment is normally `analytics-venv/` there. Do not copy a venv across computers; recreate it through setup.
+</details>
 
-## API key: blank on GitHub, real value only in the private copy
+## Connect your Qualtrics account
 
-The repository's [.env](https://github.com/wrenchjunkie69/QualtricsSkill/blob/main/.env) intentionally contains exactly:
-
-```dotenv
-APIKEY=
-```
-
-The installer creates a separate `~/.config/qualtrics/.env` outside the repository. The **private copy** receives the actual key. Setup applies private file/directory permissions on POSIX and a current-user/SYSTEM ACL on Windows. This is local plaintext credential storage, not encryption or an OS keychain. The public template stays empty; the publication check rejects a filled repository template. `.gitignore` protects other private credential/config/data files.
-
-The user enters their real account datacenter from Qualtrics Account Settings > Qualtrics IDs; `iad1` below is an example, not a universal default:
+Use an account with API access and permission for the requested operation. Find the account's real datacenter in Qualtrics Account Settings > Qualtrics IDs, or use a verified API base URL. Follow [Qualtrics' account/API setup guide](https://www.qualtrics.com/support/integrations/api-integration/overview/) if the account-settings layout differs. The `iad1` value below is only an example.
 
 ```text
 python scripts/setup.py configure --datacenter iad1 --prompt-key
 python scripts/doctor.py --check-api
 ```
 
-The masked prompt requires an interactive terminal and does not echo the key. In a headless agent session, have the user enter it into the private file locally or provide an **existing token-only private text file**:
+The masked key prompt requires an interactive terminal. In a headless session, use an existing **private, token-only text file**:
 
 ```text
 python scripts/setup.py configure --datacenter iad1 --import-key-file /private/path/api-key.txt
 ```
 
-No key is passed as a command-line value. `--base-url https://YOUR_HOST.qualtrics.com/API/v3/` is available for a verified API host. Configure records a non-secret profile.json pointing to the private .env. Existing txt key files, OAuth bearer tokens, optional `.env` variables and mTLS remain supported; see [client configuration](references/client.md). Repeated installation preserves the private key. A requested key change uses `configure --replace-key`; never regenerate account keys merely to test connectivity.
+Keep the key out of chat transcripts, public issues, source code and echoed shell arguments.
 
-An account key/permission or licensed-feature failure is distinct from a missing local dependency. No key is required for study planning, synthetic tests or analysis of a local dataset.
+The repository's [.env](https://github.com/wrenchjunkie69/QualtricsSkill/blob/main/.env) is intentionally a blank public template:
 
-## Templates and results
-
-- [Question templates](assets/questions/README.md): editable JSON for API creation, without live survey IDs or respondent data.
-- [Research templates](assets/research/README.md): a decision/research brief, question-to-objective blueprint and pilot plan, selected only when useful for the task.
-- [Python analysis starters](assets/analysis/README.md): scripts/configurations to select when analysis is requested, not an automatic battery of tests.
-- `scripts/results.py fetch`: retrieve requested survey data, question metadata and a codebook into the user's chosen new output directory; no modeling.
-- [Analytics runner](references/analytics-runner.md): CSV auditing, linear regression, binary logistic, rating conjoint, explicitly labeled full-ranking OLS approximation, and conditional-logit choice conjoint. It creates coefficients, intervals, diagnostics, reproducibility records and starter reports.
-- [Data science](references/data-science.md): leakage-resistant prediction, model selection/validation, metrics, forecasting and anomaly workflows. The optional `mining.py` starter runs a fixed binary/regression predictor on declared train/test rows; it does not perform automatic model search or nested validation.
-- [Unsupervised patterns](references/unsupervised-patterns.md): segmentation/PCA, basket associations and recommendation design. Numeric k-means/optional PCA and two-item association calculations have executable starters; broader recommenders and clustering methods are custom workflows.
-- [Marketing analytics](references/marketing-analytics.md): customer value, RFM/cohorts, experiment interpretation, response models, elasticity and decision value. A finite conditional-retention cash-flow scenario has an executable starter; it does not estimate actual lifetime behavior.
-- [Planning](references/research-planning.md) and [questionnaire design](references/questionnaire-design.md): problem definition, research questions, study design, measurement, neutral wording, question flow, sampling and pilot decisions.
-- [Method selection](references/analysis-methods.md) and [conjoint](references/conjoint.md): broader agent workflows, including ordinal/count/repeated models, tests, reliability, segmentation and text analysis. These are not all implemented core commands.
-
-Use real IDs from `node scripts/qualtrics.mjs paginate --path /surveys`; resolve ambiguity rather than guessing. Then, when retrieval is requested:
-
-```text
-python scripts/results.py fetch --survey SV_ACTUAL_ID --out /private/project/new-export
+```dotenv
+APIKEY=
 ```
 
-It saves responses.csv, the original downloaded archive, definition.json, codebook.csv and manifest.json. The export job locator is saved immediately to export-job.json while polling, so an interrupted job can be resumed instead of recreated. Optional export JSON can restrict dates, questions and other documented fields. Provide the actual saved location and export scope, then wait before optional analysis. The underlying generic export remains available through `qualtrics.mjs export`.
+The **real key goes in a separate private copy**, normally `~/.config/qualtrics/.env`, outside the repository. The installer sets restricted POSIX permissions or a current-user/SYSTEM ACL on Windows. This is local plaintext storage, not encryption or an OS keychain. A non-secret `profile.json` points to the credential file; `runtime.json` records installation/runtime paths.
 
-When a model is requested, use the recorded analytics Python with `scripts/analyze.py fit` and an explicit model configuration. Read the resulting audit/diagnostics and explain the findings; in-sample fit is not external validation, and observational associations are not automatically causal.
+Repeated installation preserves the private key. A requested replacement uses `configure --replace-key`; a verified host can be set with `--base-url https://YOUR_HOST.qualtrics.com/API/v3/`. Existing private text key files, bearer-token files and optional mTLS configuration are also supported. See [client configuration](references/client.md).
 
-For a specifically requested prediction, segmentation, pair-rule or value-scenario task, choose its edited configuration and use `scripts/mining.py --config /project/task.json --out /project/new-run` (add `--data /project/audited.csv` except for the value scenario). Read [the starter's requirements and limits](references/data-science.md), including predeclared partitions and explicit event/threshold for binary prediction. Both runners use the existing pinned local environment; no hosted notebook or additional learner package is required. No computation runs merely because these templates are installed.
+Authentication, feature permissions and local dependency failures are different problems. The agent should identify which check failed instead of regenerating keys or changing account settings to troubleshoot blindly.
 
-## Verify, update and publish
+## Run the requested step
+
+After setup, use the installed skill or these helpers. Resolve script paths from the skill/repository directory. Replace example IDs, paths and columns with actual values; select one or three CSV header records after inspecting the export.
+
+```text
+node scripts/qualtrics.mjs paginate --path /surveys
+python scripts/results.py fetch --survey SV_ACTUAL_ID --out /private/project/export-01
+ANALYTICS_PYTHON scripts/analyze.py inspect --data /project/responses.csv --header-records 3
+ANALYTICS_PYTHON scripts/analyze.py fit --data /project/analysis.csv --config /project/chosen-model.json --out /project/analysis-01
+ANALYTICS_PYTHON scripts/mining.py --data /project/audited.csv --config /project/selected-task.json --out /project/mining-01
+```
+
+These are **separate examples, not a batch to execute in sequence**. `ANALYTICS_PYTHON` means the actual executable from private `runtime.json`. A mining value scenario uses explicit assumptions and omits `--data`. See [analysis starters](assets/analysis/README.md) for configurations.
+
+For retrieval, define the intended survey, completion criteria, period/timezone and export fields. Recorded responses can include partials, and a creation-date filter is not automatically a completion-date filter. The helper preserves documented CSV export options supplied with `--options`; any requested additional local subset needs its own documented selection/counts. [Results workflows](references/workflows.md) cover those details. Deliver the saved location and scope before optional further analysis.
+
+## Verification and updates
+
+The repository includes Windows, macOS and Linux CI, synthetic data tests, inert-credential API-client tests, installation checks and independent forward-use verification. Isolated live API checks exercised draft/question creation and readback, a test response, export/download and verified fixture deletion. This does not mean every documented operation or account entitlement was exercised live.
+
+Use [verification and limits](references/verification.md) to distinguish tested paths from broader guidance. It covers statistical assumptions, untested licensed/admin services, host-discovery limits and the difference between API readback and actual respondent comprehension/rendering.
+
+<details>
+<summary>Commands for verification and maintenance</summary>
 
 ```text
 node --test scripts/qualtrics.test.mjs
-python -m unittest discover -s scripts -p test_setup.py
-python -m unittest discover -s scripts -p test_results.py
-python -m unittest discover -s scripts -p test_public_check.py
-ANALYTICS_PYTHON -m unittest discover -s scripts -p test_analytics.py
-ANALYTICS_PYTHON -m unittest discover -s scripts -p test_assets.py
-ANALYTICS_PYTHON -m unittest discover -s scripts -p test_mining.py
+ANALYTICS_PYTHON -m unittest discover -s scripts -p "test_*.py"
+python scripts/doctor.py
 python scripts/public_check.py
 ```
 
-`ANALYTICS_PYTHON` means the executable path from private runtime.json; replace it, do not type it literally. Tests use inert keys/synthetic data, never the user's account. Optional `doctor.py --check-api` makes only an authenticated GET. [Verification details and limitations](references/verification.md) distinguish implemented/tested paths from merely documented or account-dependent capabilities.
+Use the analytics interpreter for the complete Python suite. Tests use synthetic data/inert credentials. `doctor.py --check-api` separately adds an authenticated GET; offline test success does not establish account permissions.
 
-The official-contract cache is generated locally, ignored by Git, and recreated during setup. `refresh_catalog.py` updates it from the official site; `verify_docs.py` can independently check rendered methods/paths. Upstream website-format changes fail clearly rather than pretending all endpoints were refreshed.
+To update, obtain the intended repository revision, inspect changes, then run:
 
-Update from the chosen repository revision, inspect changes, then rerun `setup.py install --update`. Re-run doctor/tests. A GitHub Actions workflow is provided for Windows/macOS/Linux validation after publication; local testing on one OS does not prove the remote matrix has already passed.
+```text
+python scripts/setup.py install --update
+python scripts/doctor.py
+```
 
-Before sharing, run public_check.py and review `git status`/the staged diff. Publish this repository directory only—not its parent folder or private configuration. The source package excludes virtual environments, account files, data exports, test outputs and cached upstream contracts. The publication check is a focused safeguard, not a general-purpose detector for every possible secret. No GitHub repository is created or pushed by installation.
+The official-contract cache is generated locally and ignored by Git. Refresh with `python scripts/refresh_catalog.py`; `verify_docs.py` can independently compare rendered endpoint methods/paths. A format-change failure must be reported, not treated as a successful refresh.
 
-Original tooling is MIT licensed; see [LICENSE](LICENSE) and [NOTICE](NOTICE.md) for upstream attribution. [Qualtrics Public API](https://developer-docs.qualtrics.com/docs/public-api/home/) remains authoritative for API behavior.
+Before publishing a fork/change, run `public_check.py`, inspect `git status` and review staged files. The check rejects a filled public `.env`, private/generated/data candidates and broken local links; it is a focused safeguard rather than an exhaustive secret/history scanner. Publish this repository directory only. Private configuration, exports, environments and cached upstream contracts are excluded from the source package. Installation does not create or push a GitHub repository.
 
+</details>
 
-## Give this link to an AI
+## Choose your next useful step
 
-A useful installation request is: “Read the README at https://github.com/wrenchjunkie69/QualtricsSkill, inspect and install the skill for my AI app, create/check the isolated analytics environment, and guide me through private API-key setup if I need account access. Verify the installation, then wait for my research task.”
+Give your AI the repository link and the research outcome you need: a clearer question, a better instrument, a verified export, an appropriate analysis or a result you can explain. Start there, and build on the work when your project calls for it.
 
-After installation, give the agent the actual goal and requested deliverable: a research question, a questionnaire critique, an inactive survey draft, an export, a subgroup comparison or a specified model. It should infer the useful method and ask for missing essentials without treating every task as a full research project. No screen-control or automatic full-study pipeline is implied.
+Original tooling is MIT licensed. See [LICENSE](LICENSE) and [NOTICE](NOTICE.md) for terms and upstream attribution.
