@@ -24,6 +24,8 @@ This requires an agent with a local terminal/filesystem and the user's authority
 | A researcher needs last month's responses archived | Export the selected records, verify files and report location/options/count. Offer further help without automatically analyzing. |
 | A student asks whether renewal intention can be modeled | Inspect measurement, predictors, sample and dependence; discuss an appropriate model before fitting one. |
 | A product team requests trade-off analysis | Match rating, ranking or choice tasks to their actual design and run the requested justified analysis. |
+| An analyst wants to predict future renewals or compare customer segments | Choose a suitable target/feature window or segmentation basis, preserve respondent/time structure, and run only the selected justified workflow. |
+| A student needs a customer-value or basket-pattern calculation | Make timing, cash-flow or basket assumptions explicit and distinguish a descriptive/scenario result from a measured causal business effect. |
 
 **Programmatic execution:** Qualtrics operations use documented HTTP endpoints or API connectors/MCP. Statistics run in Python/R; transfers use documented files. No automatic browser/editor/screen takeover when an API route exists. For an unsupported feature, inspect the contract/existing definitions, use a supplied template, or explain the gap. Screen control requires an explicit user request.
 
@@ -100,6 +102,9 @@ An account key/permission or licensed-feature failure is distinct from a missing
 - [Python analysis starters](assets/analysis/README.md): scripts/configurations to select when analysis is requested, not an automatic battery of tests.
 - `scripts/results.py fetch`: retrieve requested survey data, question metadata and a codebook into the user's chosen new output directory; no modeling.
 - [Analytics runner](references/analytics-runner.md): CSV auditing, linear regression, binary logistic, rating conjoint, explicitly labeled full-ranking OLS approximation, and conditional-logit choice conjoint. It creates coefficients, intervals, diagnostics, reproducibility records and starter reports.
+- [Data science](references/data-science.md): leakage-resistant prediction, model selection/validation, metrics, forecasting and anomaly workflows. The optional `mining.py` starter runs a fixed binary/regression predictor on declared train/test rows; it does not perform automatic model search or nested validation.
+- [Unsupervised patterns](references/unsupervised-patterns.md): segmentation/PCA, basket associations and recommendation design. Numeric k-means/optional PCA and two-item association calculations have executable starters; broader recommenders and clustering methods are custom workflows.
+- [Marketing analytics](references/marketing-analytics.md): customer value, RFM/cohorts, experiment interpretation, response models, elasticity and decision value. A finite conditional-retention cash-flow scenario has an executable starter; it does not estimate actual lifetime behavior.
 - [Planning](references/research-planning.md) and [questionnaire design](references/questionnaire-design.md): problem definition, research questions, study design, measurement, neutral wording, question flow, sampling and pilot decisions.
 - [Method selection](references/analysis-methods.md) and [conjoint](references/conjoint.md): broader agent workflows, including ordinal/count/repeated models, tests, reliability, segmentation and text analysis. These are not all implemented core commands.
 
@@ -113,6 +118,8 @@ It saves responses.csv, the original downloaded archive, definition.json, codebo
 
 When a model is requested, use the recorded analytics Python with `scripts/analyze.py fit` and an explicit model configuration. Read the resulting audit/diagnostics and explain the findings; in-sample fit is not external validation, and observational associations are not automatically causal.
 
+For a specifically requested prediction, segmentation, pair-rule or value-scenario task, choose its edited configuration and use `scripts/mining.py --config /project/task.json --out /project/new-run` (add `--data /project/audited.csv` except for the value scenario). Read [the starter's requirements and limits](references/data-science.md), including predeclared partitions and explicit event/threshold for binary prediction. Both runners use the existing pinned local environment; no hosted notebook or additional learner package is required. No computation runs merely because these templates are installed.
+
 ## Verify, update and publish
 
 ```text
@@ -122,6 +129,7 @@ python -m unittest discover -s scripts -p test_results.py
 python -m unittest discover -s scripts -p test_public_check.py
 ANALYTICS_PYTHON -m unittest discover -s scripts -p test_analytics.py
 ANALYTICS_PYTHON -m unittest discover -s scripts -p test_assets.py
+ANALYTICS_PYTHON -m unittest discover -s scripts -p test_mining.py
 python scripts/public_check.py
 ```
 

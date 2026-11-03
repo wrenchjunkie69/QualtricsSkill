@@ -1,0 +1,15 @@
+{
+  "task": "supervised",
+  "problem": "binary",
+  "target": "renewed",
+  "positive_event": "yes",
+  "numeric": ["visits_before_offer", "experience_score"],
+  "categorical": ["plan_type"],
+  "partition": "split",
+  "group": "respondent_id",
+  "algorithm": "linear",
+  "parameters": {"C": 1.0},
+  "threshold": 0.5,
+  "seed": 2026,
+  "missing_values": []
+}

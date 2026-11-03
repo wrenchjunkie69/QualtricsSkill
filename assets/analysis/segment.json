@@ -1,0 +1,9 @@
+{
+  "task": "segment",
+  "unit": "respondent_id",
+  "features": ["convenience_score", "variety_score", "service_score"],
+  "clusters": 3,
+  "pca_components": 2,
+  "seed": 2026,
+  "missing_values": []
+}

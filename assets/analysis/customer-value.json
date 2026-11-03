@@ -1,0 +1,9 @@
+{
+  "task": "customer_value",
+  "period": "month",
+  "retention": [0.8, 0.8, 0.8],
+  "margin": [30, 30, 30],
+  "discount_rate": 0.01,
+  "initial_margin": 0,
+  "acquisition_cost": 12
+}

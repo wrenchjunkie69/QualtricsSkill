@@ -1,0 +1,43 @@
+# Segmentation, dimensions, associations and recommendations
+
+Use only the part relevant to the requested question. These methods describe patterns under chosen representations; they do not by themselves establish causes, population segments or profitable interventions. See [data science](data-science.md) for leakage/validation and [marketing analytics](marketing-analytics.md) for decision use.
+
+## Segmentation basis and unit
+
+Define whom/what is being grouped and why. Separate the features defining similarity from external variables used later to describe or validate the groups. For survey segmentation, prepare one defensible profile per independent person/unit; repeated conjoint tasks are not separate customers. Aggregate with a stated rule or use an appropriate model. Do not segment on a future outcome and then present its difference between clusters as independent validation.
+
+Select coherent needs, benefits, attitudes, behaviors or justified utility estimates. Numeric nominal codes do not define meaningful Euclidean distances. Decide how to handle mixed types, ordinal approximations, missingness, outliers and redundant variables; scaling can change the result. Repeating many near-duplicate items overweights a construct. A demographic descriptor may help interpret groups without being needed to construct them. Keep individual utility uncertainty in mind before clustering estimated conjoint part-worths; pooled utilities are not individual estimates.
+
+## Clustering and validation
+
+K-means partitions numeric feature space around means and favors its squared-Euclidean geometry; it is sensitive to scale, initialization, outliers and the chosen k. It is not hierarchical top-down clustering. Agglomerative clustering merges groups under a linkage/distance definition; Ward linkage uses a specific Euclidean variance criterion. A dendrogram is a representation of those merges, not a proof of the correct number of market segments. Use an appropriate mixed-data/density/model-based method when the representation requires it; do not force every variable into k-means.
+
+Compare plausible solutions for separation, small/unstable groups and sensitivity to feature/scaling/missingness choices. Inertia improves as k grows, so lower inertia alone does not choose k. An elbow may be unclear. A [silhouette score](https://scikit-learn.org/stable/modules/clustering.html#silhouette-coefficient) depends on geometry and can favor convex separated clusters; no universal cutoff proves business quality. Initialization agreement on the same observations is weaker evidence than resampling stability, replication or later-period performance. Use label-invariant comparisons such as adjusted Rand index rather than comparing arbitrary cluster numbers directly.
+
+Profile clusters in original units with size, distributions and uncertainty appropriate to the analysis. A difference in a variable used to define clusters is largely built in, not an independent confirmatory discovery. Name groups from observed features and qualify tentative interpretations; do not invent motives, personal biographies or demographic stereotypes. Assess whether a solution is sufficiently stable, distinguishable, reachable and useful for the proposed action. Validate interventions separately. Saving a segment assignment does not authorize sending offers.
+
+The `segment` task in `scripts/mining.py` is a bounded exploratory starter: distinct observed unit IDs, varying numeric features, median imputation, standardization, optional explicitly chosen integer PCA dimension, and one chosen k. It runs three initializations at that k, reports same-sample pairwise ARI, silhouette in the fitted space (sampled up to 5,000 rows), assignments and observed-unit feature profiles. It does not optimize k, discover labels, handle mixed categorical distance or establish external stability/causal value. Missing observed values are excluded from profile means/counts even though fitting used imputed values; read those counts.
+
+## Dimensionality reduction
+
+PCA forms orthogonal linear combinations that retain variance under the chosen scale; high retained variance does not guarantee high predictive value or construct validity. Fit preprocessing/PCA inside predictive training folds. For exploratory descriptions, state the sample used to fit them and retain feature/scaling definitions. Choose components for the purpose, inspect the scree/cumulative variance and information loss, and avoid a mandatory 80%/90% rule.
+
+Component direction signs are arbitrary. Eigenvector/component weights, correlations/loadings and scores are different quantities; label the actual output. The starter saves `pca_component_weights`, not a fabricated validated factor scale. Interpret profiles in original units before naming axes/segments. PCA, exploratory/common factor models and confirmatory measurement models answer different questions. t-SNE/UMAP are visualization/representation tools with parameter sensitivity; apparent islands and inter-island spacing are not proof of stable market clusters. Nonlinear embeddings are custom workflows with their own dependency/validation needs.
+
+## Basket and multi-select associations
+
+Define a basket/occasion and the eligible item universe. Use one observed indicator per item per basket; deduplicate repeated line items appropriately. For survey checkboxes, distinguish an unselected option from a wholly missing/inapplicable item and account for display logic. A survey response occasion is not automatically a shopping transaction. Common denominators and explicit missing rules matter.
+
+For disjoint itemsets A and B, support(A,B) is the proportion of eligible baskets containing both; confidence(A -> B) = support(A,B)/support(A); lift = support(A,B)/(support(A)*support(B)). Confidence is directional; pairwise lift is symmetric. High confidence may just reflect a common consequent. Report counts/base rates and useful absolute differences such as leverage, not just spectacular lift from a rare pair. An itemset cannot be more frequent than its subset; Apriori/FP-growth exploit such structure but can still generate many exploratory rules.
+
+Rules do not show that buying A causes B, that A occurred first, or that a discount/bundle will increase profit. Assess rule stability on independent/later baskets, repeated-customer dependence, multiple searches, availability, promotions and practical relevance. Test any intervention separately. A pair with no observed antecedent has undefined confidence/lift; do not replace a zero denominator with an invented value.
+
+The `association_pairs` task computes only two-item co-occurrence, both directional confidences, symmetric lift and leverage for explicitly selected 0/1 columns. It rejects missing/nonbinary indicators, uses all supplied rows as the denominator, and applies the chosen minimum co-occurrence count. Zero returned rules is a valid result. It does not implement full Apriori, larger itemsets, sequence mining, inferential significance or causal recommendation effects.
+
+## Recommender workflows
+
+Start with eligible catalog, user/session context, observed feedback and the decision to rank. Content-based similarity uses item metadata; collaborative filtering uses interactions; hybrids combine signals. Explicit ratings, purchases, clicks, exposures and unknown interactions mean different things. Unobserved is not a measured dislike. Popularity/exposure and missing-not-at-random feedback can bias evaluation.
+
+Use popularity/recent/popular-in-category baselines, useful cold-start fallbacks and appropriate sparse representations. Transposing a user-item matrix does not remove sparsity or create observations. Similarity must be computed using training history only, with sufficient overlap/shrinkage where needed. Avoid dense all-pairs matrices when scale makes them infeasible. Handle new users/items and distinguish known-user from cold-start evaluation.
+
+Hold out interactions in a way matching the intended future use; prevent future interactions leaking into histories, similarities or candidates. Define candidate availability, already-consumed exclusions and negative-sampling policy. Evaluate relevant ranking measures such as precision/recall/NDCG at k, coverage/diversity and eventual decision value; rating RMSE alone does not validate recommendations. Offline ranking improvements do not establish incremental sales or retention; an appropriate online experiment is a separate requested scope. Recommenders are custom Python workflows here, not a built-in command or a reason to upload data to a hosted notebook.

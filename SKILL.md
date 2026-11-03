@@ -1,6 +1,6 @@
 ---
 name: qualtrics
-description: Plan student research, develop Qualtrics surveys, and analyze survey data with regression, conjoint, statistical tests, segmentation, and reproducible reports. Use for Qualtrics surveys/results/API tasks, marketing research study design, variable-type or analysis planning, linear/logistic modeling of survey data, and rating/ranking/choice conjoint studies.
+description: Plan research, develop Qualtrics surveys, retrieve responses, and analyze survey or marketing data with regression, conjoint, prediction, segmentation and customer-value workflows. Use for Qualtrics APIs/results, survey research design, marketing analytics, and data-mining or validation tasks on survey/customer data.
 ---
 
 # Qualtrics
@@ -39,6 +39,9 @@ Use this skill for a whole student research project or just the requested step. 
 | Develop or critique questionnaire wording, scales, order or branching | [Questionnaire design](references/questionnaire-design.md), plus planning when the goal is unclear | Goal-linked questionnaire, codebook, logic specification and proportionate pilot plan |
 | Plan experiments, sampling or repeated measurement | [Research planning](references/research-planning.md), then questionnaire/API references as needed | Design, assignment/recruitment plan, measures and analysis assumptions |
 | Clean, describe, compare, model, segment or analyze text | [Analysis methods](references/analysis-methods.md) | Audited analysis dataset, justified method, diagnostics and interpretable results |
+| Predict outcomes, compare learning methods or plan validation | [Data science](references/data-science.md) | Target/feature timing, appropriate partitions, selected pipeline, honest baseline/holdout metrics |
+| Cluster customers, reduce dimensions, discover co-selections or plan recommendations | [Unsupervised patterns](references/unsupervised-patterns.md) | Justified representation, patterns/profiles, stability/validation and method limits |
+| Customer value, RFM/cohorts, marketing response or campaign/experiment analysis | [Marketing analytics](references/marketing-analytics.md) | Explicit units/denominators, economic assumptions, comparisons and decision interpretation |
 | Rating, rank, choice conjoint or MaxDiff | [Conjoint](references/conjoint.md) | Attribute/level design, task/data structure, appropriate estimation and limitations |
 | Run supported models or create reproducible class deliverables | [Analytics runner](references/analytics-runner.md) | Executed code, model tables/diagnostics, audit trail and student-facing explanation |
 
@@ -48,7 +51,9 @@ For survey development, first connect the intended decision to research question
 
 Plan the outcome scale, predictors, unit of analysis, repeated observations, exclusions, missing values, contrasts and validation before fitting. The numeric appearance of a category code does not make it continuous. Distinguish explanation, prediction and causal estimation; observational associations do not establish an intervention effect. Do not use outcome leakage or repeated rows from the same person as independent validation samples.
 
-The optional Python runner performs CSV auditing, linear regression, binary logistic regression, rating conjoint, an explicitly chosen OLS approximation for complete rankings, and conditional-logit choice conjoint. Other methods in the analysis reference are agent workflows using appropriate libraries, not implemented runner commands. Keep this distinction in completion reports. Use synthetic fixtures only for tests and label them as such.
+The optional `analyze.py` runner performs CSV auditing, inferential linear/binary logistic regression, rating conjoint, an explicitly chosen OLS approximation for complete rankings, and conditional-logit choice conjoint. `mining.py` offers separate selected tasks: fixed-model binary/numeric holdout prediction, numeric k-means with optional PCA, pairwise co-occurrence and finite customer-value scenarios. Its five predictive estimator choices are regularized linear/logistic, tree, forest, kNN and a small MLP. These are local Python calculations, not Qualtrics API features. Other methods in the references need appropriate custom workflows; keep implemented versus guided capabilities clear. Use synthetic fixtures only for tests and label them as such.
+
+For prediction, define the prediction moment, outcome horizon and available features; use respondent/group/time-aware partitions matching the claim. Fit learned preprocessing only inside training data/folds and keep tuning/threshold selection separate from honest evaluation. A fit score, a stable-looking cluster, an association rule and a profitable causal intervention are different results. Do not launch model searches or fit a full suite just because data were retrieved.
 
 ## Workflow
 

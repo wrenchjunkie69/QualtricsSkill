@@ -1,0 +1,6 @@
+{
+  "task": "association_pairs",
+  "items": ["item_a", "item_b", "item_c"],
+  "min_count": 5,
+  "missing_values": []
+}

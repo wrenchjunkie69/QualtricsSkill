@@ -27,6 +27,8 @@ Identify the research question, measurement scale, sampling unit and dependence 
 
 Methods in this table are workflows an agent can implement with suitable libraries. The bundled runner implements only the explicitly listed core models in its reference; do not report every table entry as an automated built-in.
 
+For predictive learning/validation, use [data science](data-science.md); for PCA, clusters, associations or recommendations use [unsupervised patterns](unsupervised-patterns.md); for customer value, RFM, campaign economics or marketing-response interpretation use [marketing analytics](marketing-analytics.md). Each distinguishes the additional selected Python starters from custom-method guidance. Match the student's inference, prediction or discovery objective instead of routing every dataset into regression.
+
 ## Data audit and preparation
 
 Keep the raw export immutable. Record its hash, source/date, export options and codebook. Qualtrics CSV can have one or three header records; inspect before selecting parser options. A file extension or a numeric dtype does not identify the measurement scale. Retain stable response/participant IDs for deduplication and dependence checks, without exposing them needlessly in reports.
