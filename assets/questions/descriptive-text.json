@@ -1,0 +1,18 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "None"
+    }
+  },
+  "QuestionType": "DB",
+  "Selector": "TB",
+  "QuestionDescription": "Please read the following instructions before continuing.",
+  "QuestionText": "Please read the following instructions before continuing.",
+  "DataExportTag": "ExampleDescriptiveText"
+}

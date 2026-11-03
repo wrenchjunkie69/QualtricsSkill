@@ -1,0 +1,56 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "None"
+    }
+  },
+  "QuestionType": "Matrix",
+  "Selector": "Likert",
+  "QuestionDescription": "How strongly do you agree with each statement?",
+  "QuestionText": "How strongly do you agree with each statement?",
+  "DataExportTag": "ExampleLikertMatrix",
+  "SubSelector": "SingleAnswer",
+  "ChoiceDataExportTags": false,
+  "Choices": {
+    "1": {
+      "Display": "The service meets my needs."
+    },
+    "2": {
+      "Display": "The service is convenient."
+    }
+  },
+  "ChoiceOrder": [
+    "1",
+    "2"
+  ],
+  "Answers": {
+    "1": {
+      "Display": "Strongly disagree"
+    },
+    "2": {
+      "Display": "Disagree"
+    },
+    "3": {
+      "Display": "Neither agree nor disagree"
+    },
+    "4": {
+      "Display": "Agree"
+    },
+    "5": {
+      "Display": "Strongly agree"
+    }
+  },
+  "AnswerOrder": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ]
+}

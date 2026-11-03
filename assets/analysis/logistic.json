@@ -1,0 +1,21 @@
+{
+  "model": "logistic",
+  "outcome": {
+    "column": "purchase",
+    "event": "yes",
+    "non_event": "no"
+  },
+  "numeric": [
+    "wait_minutes"
+  ],
+  "categorical": {
+    "service_type": {
+      "levels": [
+        "standard",
+        "priority"
+      ],
+      "reference": "standard"
+    }
+  },
+  "missing": "error"
+}

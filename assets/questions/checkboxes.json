@@ -1,0 +1,35 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "None"
+    }
+  },
+  "QuestionType": "MC",
+  "Selector": "MAVR",
+  "QuestionDescription": "Which options apply to you? Select all that apply.",
+  "QuestionText": "Which options apply to you? Select all that apply.",
+  "DataExportTag": "ExampleCheckboxes",
+  "SubSelector": "TX",
+  "Choices": {
+    "1": {
+      "Display": "Option A"
+    },
+    "2": {
+      "Display": "Option B"
+    },
+    "3": {
+      "Display": "Option C"
+    }
+  },
+  "ChoiceOrder": [
+    "1",
+    "2",
+    "3"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "model": "conjoint-rating",
+  "outcome": {
+    "column": "rating"
+  },
+  "respondent": "respondent_id",
+  "task": "task_id",
+  "profile": "profile_id",
+  "numeric": [],
+  "categorical": {
+    "service": {
+      "levels": [
+        "basic",
+        "premium"
+      ],
+      "reference": "basic"
+    },
+    "price": {
+      "levels": [
+        "10",
+        "20"
+      ],
+      "reference": "10"
+    }
+  },
+  "missing": "error",
+  "seed": 20261103
+}

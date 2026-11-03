@@ -1,0 +1,19 @@
+{
+  "model": "linear",
+  "outcome": {
+    "column": "satisfaction_score"
+  },
+  "numeric": [
+    "wait_minutes"
+  ],
+  "categorical": {
+    "service_type": {
+      "levels": [
+        "standard",
+        "priority"
+      ],
+      "reference": "standard"
+    }
+  },
+  "missing": "error"
+}

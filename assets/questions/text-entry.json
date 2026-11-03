@@ -1,0 +1,18 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "None"
+    }
+  },
+  "QuestionType": "TE",
+  "Selector": "SL",
+  "QuestionDescription": "What would you like us to know?",
+  "QuestionText": "What would you like us to know?",
+  "DataExportTag": "ExampleTextEntry"
+}

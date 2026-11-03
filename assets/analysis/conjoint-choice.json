@@ -1,0 +1,31 @@
+{
+  "model": "conjoint-choice",
+  "outcome": {
+    "column": "chosen",
+    "event": "1",
+    "non_event": "0"
+  },
+  "respondent": "respondent_id",
+  "task": "task_id",
+  "profile": "profile_id",
+  "numeric": [],
+  "categorical": {
+    "service": {
+      "levels": [
+        "basic",
+        "premium"
+      ],
+      "reference": "basic"
+    },
+    "price": {
+      "levels": [
+        "10",
+        "20"
+      ],
+      "reference": "10"
+    }
+  },
+  "missing": "error",
+  "seed": 20261103,
+  "bootstrap_reps": 500
+}

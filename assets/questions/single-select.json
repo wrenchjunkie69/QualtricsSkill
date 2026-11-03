@@ -1,0 +1,35 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "None"
+    }
+  },
+  "QuestionType": "MC",
+  "Selector": "SAVR",
+  "QuestionDescription": "Which option do you prefer?",
+  "QuestionText": "Which option do you prefer?",
+  "DataExportTag": "ExampleSingleSelect",
+  "SubSelector": "TX",
+  "Choices": {
+    "1": {
+      "Display": "Option A"
+    },
+    "2": {
+      "Display": "Option B"
+    },
+    "3": {
+      "Display": "Option C"
+    }
+  },
+  "ChoiceOrder": [
+    "1",
+    "2",
+    "3"
+  ]
+}

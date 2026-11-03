@@ -1,0 +1,4 @@
+interface:
+  display_name: "Qualtrics"
+  short_description: "Plan surveys, analyze data, and use Qualtrics APIs"
+  default_prompt: "Use $qualtrics to plan my study, develop a survey, or analyze survey results with an appropriate statistical method."

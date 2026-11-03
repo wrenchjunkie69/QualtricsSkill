@@ -1,0 +1,44 @@
+# The sole public credential file is a deliberately EMPTY root template.
+**/.env
+**/.env.*
+!/.env
+!/.env.example
+*.local.env
+api-key.txt
+api_key.txt
+*API Key*.txt
+*api key*.txt
+profile.json
+runtime.json
+credentials/
+secrets/
+.secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Generated contracts are downloaded from official Qualtrics docs during setup.
+references/api/
+
+# Environments, caches, local research data and outputs never belong in this repo.
+.venv/
+venv/
+analytics-venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.cache/
+node_modules/
+data/
+results/
+outputs/
+exports/
+*.csv
+*.xlsx
+*.sav
+*.zip
+*.part
+*.tmp
+.DS_Store
+Thumbs.db

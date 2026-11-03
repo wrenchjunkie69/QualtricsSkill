@@ -1,0 +1,36 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "ON",
+      "ForceResponseType": "ON",
+      "Type": "Consecutive"
+    }
+  },
+  "QuestionType": "RO",
+  "Selector": "VR",
+  "QuestionDescription": "Rank these options from 1 (most preferred) to 3 (least preferred). Use every rank once.",
+  "QuestionText": "Rank these options from 1 (most preferred) to 3 (least preferred). Use every rank once.",
+  "DataExportTag": "ExampleRankOrder",
+  "SubSelector": "TX",
+  "Choices": {
+    "1": {
+      "Display": "Option A"
+    },
+    "2": {
+      "Display": "Option B"
+    },
+    "3": {
+      "Display": "Option C"
+    }
+  },
+  "ChoiceOrder": [
+    "1",
+    "2",
+    "3"
+  ]
+}

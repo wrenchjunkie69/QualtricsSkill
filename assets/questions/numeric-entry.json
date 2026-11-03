@@ -1,0 +1,19 @@
+{
+  "Configuration": {
+    "QuestionDescriptionOption": "UseText"
+  },
+  "Language": [],
+  "DefaultChoices": false,
+  "Validation": {
+    "Settings": {
+      "ForceResponse": "OFF",
+      "Type": "ContentType",
+      "ContentType": "ValidNumber"
+    }
+  },
+  "QuestionType": "TE",
+  "Selector": "SL",
+  "QuestionDescription": "How many visits did you make in the past 30 days?",
+  "QuestionText": "How many visits did you make in the past 30 days?",
+  "DataExportTag": "ExampleNumericEntry"
+}

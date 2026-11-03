@@ -1,0 +1,34 @@
+# Verification and scope
+
+Checked November 3, 2026. The skill is a selectable toolbox: result retrieval does not automatically fit models or modify surveys. Qualtrics operations use APIs; statistics use local Python. Tests use inert credentials and deliberately synthetic data unless a live test is explicitly identified.
+
+## Verified components
+
+- API catalog snapshot: 309 documented operations across 43 groups. Every cached contract checksum/method/path was checked, and all 309 rendered official endpoint pages matched. Public source excludes the cache; setup fetches it locally from the official documentation and checks completeness.
+- API transport: authenticated JSON/raw/multipart requests, uploads/downloads, pagination, polling, exports, retry/redirect boundaries and redaction. Inert tests include echoed body/header secrets, private .env loading and invalid/empty template handling.
+- Analytics core: linear and binary logistic regression, rating conjoint, a labeled complete-ranking OLS approximation and conditional-logit choice conjoint. Tests recover planted coefficients, check coding/independent units/missingness, ranking/task validity, seeded respondent bootstrap, finite-MLE/separation safeguards, data integrity and output artifacts.
+- Five complete synthetic CLI model runs produced tables, plots and provenance records while preserving the input files. Quoted multiline three-record Qualtrics CSV headers and UTF-8 BOM were tested. Diagnostic figures were visually inspected.
+- Independent forward testing found and verified fixes for repeated-person cluster nesting, custom missing codes replacing blank handling, and complete/quasi separation producing spurious finite conditional-logit estimates. Binary and conditional models now use a bounded-LP separation check, including bootstrap fits; passing numerical checks is not proof of statistical adequacy.
+- A developer's authorized live account test exercised authentication, survey listing/definition reads, an isolated inactive draft, question create/update/readback, one isolated test response, export/poll/download and verified fixture deletion. Existing surveys were not used for writes. No survey was published or invitations sent.
+- Codex enabled user-scope discovery was verified. The same portable instructions were installed for Claude Code; a live Claude invocation could not be validated because its separate account login had expired. Filesystem installation is distinct from actual model selection.
+
+The current test commands and additional installation/retrieval/template checks are listed in README. A Windows-native clean-install check is performed for this release; the included Windows/macOS/Linux CI matrix runs only after a repository is published. Do not claim an unexecuted remote matrix already passed.
+
+## Important limits
+
+Documentation coverage does not grant account permissions or mean every operation was executed live. Licensed/admin/messaging/erasure products, live webhooks, OAuth issuance, mTLS infrastructure and Sessions V2 were not exercised on a live account. Read current contracts and report actual entitlement errors.
+
+Some generated upstream question schemas omit working editor-supported configurations. Question templates can be based on API-retrieved working definitions, with readback verification. An unknown schema is not a reason for automatic screen control; use an existing API/QSF template or explain/request the missing input. No screen/editor takeover is part of normal operation.
+
+The core does not implement every method in the analysis router: ordinal/multinomial/count/mixed models, MaxDiff, hierarchical Bayes, individual utilities, utility/importance intervals, WTP, market-share scenarios and external predictive validation require separate appropriate workflows. Ranking OLS is explicitly an equal-spacing approximation; bootstrap intervals are approximate and need stability/independent-unit assessment. Numeric conjoint attributes without declared ranges do not get fabricated overall importance percentages.
+
+Current published schemas/examples can contain upstream inconsistencies. The cache is not an independent OpenAPI conformance certification; format changes fail the refresh clearly. The public source audit is a focused packaging safeguard, not a universal secret scanner or complete history audit. Credentials, account configuration, private reports, exports and Python environments are not public source artifacts.
+
+## Installation, templates and retrieval release checks
+
+- A fresh isolated Windows installation provisioned the pinned Python environment, fetched official contracts, installed both host folders, and ran local tests. Doctor verified all 24 dependency pins after canonicalizing package-name punctuation. Package-copy mode avoids cloud-filesystem hardlink errors.
+- Independent installation review reproduced and verified fixes for Windows explicit read grants, credential-source preservation during datacenter-only updates, and export-job persistence before polling completes. Private directories/files receive a DACL with current-user/SYSTEM access on Windows; POSIX uses restricted directory/file modes. API-only isolated install/update preserved inert credentials and made private backups.
+- Public `.env` is exactly an empty APIKEY assignment. Focused publication checks reject a filled working or staged/index template and private/generated/data publication candidates. New private key storage lives outside the checkout; installation never replaces a populated private key with the empty public template.
+- Seven generic question JSON templates (single select, checkboxes, text, numeric, Likert matrix, rank order, descriptive text) passed API creation/readback in one isolated inactive test survey; its deletion was verified. Numeric and consecutive-rank validation settings were retained. This does not claim respondent-facing rendering/behavior was tested through a screen or that every tenant has identical entitlements.
+- Selectable analysis assets include five executable model configurations, a Python selected-model runner and an independent-group Welch starter. Synthetic tests execute these deliberately selected analyses and reject repeated-person misuse. They are not automatic startup analyses.
+- Retrieval helper tests verify metadata/export-only calls, preserved export options, safe fixed-path CSV extraction, header/codebook mapping, counts, no modeling, and immediate resumable job state. It delivers locations and offers a next step without starting optional analysis.
